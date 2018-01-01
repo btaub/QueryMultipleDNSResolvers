@@ -10,7 +10,7 @@ Required - dnspython http://www.dnspython.org (pip install dnspython or apt inst
 ## Sample output:
 
 ```
-$ ./QueryMultipleDNSResolvers -l public-dns-servers.short akamai.com
+$ ./QueryMultipleDNSResolvers.py -l public-dns-servers.short akamai.com
  [+] Record: 23.207.40.217
  [+] Record: 23.207.40.217
  [+] Record: 104.125.60.47
@@ -25,7 +25,7 @@ Unique record(s) for akamai.com:
 23.54.250.94
 104.125.60.47
 
-$ ./QueryMultipleDNSResolvers -l public-dns-servers.short akamai.com -v
+$ ./QueryMultipleDNSResolvers.py -l public-dns-servers.short akamai.com -v
 
 Number of resolvers to be used: 6
 
