@@ -45,5 +45,5 @@ for q in list_of_resolvers:
 
 print("\033[;1m\nUnique record(s) for %s:\n" %args.DOMAIN)
 
-for u in set(result):
+for u in sorted(set(result)):
     print("\033[;0m %s" %u)
