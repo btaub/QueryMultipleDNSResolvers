@@ -30,21 +30,20 @@ for q in list_of_resolvers:
     qq.append(q)
     resolver.nameservers = qq
     if args.VERBOSE:
-        print('RESOLVER: %s' % q)
+        print('\033[0;91m[!] RESOLVER: %s' % q)
     try:
         resolver.timeout = 10 # Not working, why?
         answer = resolver.query(args.DOMAIN, args.TYPE)
         for rr in answer:
-            print(" [+] Record: %s" %rr)
+            print("\033[1;32m[+] Record: %s" %rr)
             result.append(str(rr))
     except Exception as e:
         print("Error %s, %r" %(q,e))
 # Trap Ctrl-c to bypass slow/unresponive DNS server
     except KeyboardInterrupt:
         print("User cancelled, skipping %s" %q)
-        pass
 
-print("\nUnique record(s) for %s:\n" %args.DOMAIN)
+print("\033[;1m\nUnique record(s) for %s:\n" %args.DOMAIN)
 
 for u in set(result):
-    print(u)
+    print("\033[;0m %s" %u)
