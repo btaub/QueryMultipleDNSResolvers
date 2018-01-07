@@ -1,7 +1,7 @@
 # QueryMultipleDNSResolvers
 A script to check record status against N public dns resolvers
 
-This tool can be useful if you make frequent public DNS changes and need to check propagation status. The full list of resolvers was grabbed from: https://www.lifewire.com/free-and-public-dns-servers-2626062
+This tool can be useful if you make frequent DNS changes and need to check propagation status. The full list of resolvers was grabbed from: https://www.lifewire.com/free-and-public-dns-servers-2626062
 
 Future improvements will be colorized output and (possibly) output analysis - report differences on record(s).
 
