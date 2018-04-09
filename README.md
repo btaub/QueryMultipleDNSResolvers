@@ -11,42 +11,42 @@ Required - dnspython http://www.dnspython.org (pip install dnspython or apt inst
 
 ```
 $ ./QueryMultipleDNSResolvers.py -l public-dns-servers.short akamai.com
- [+] Record: 23.207.40.217
- [+] Record: 23.207.40.217
- [+] Record: 104.125.60.47
- [+] Record: 23.60.11.13
- [+] Record: 23.54.250.94
- [+] Record: 23.60.11.13
+[+] Record: 104.121.219.185
+[+] Record: 104.108.37.78
+[+] Record: 104.121.219.185
+[+] Record: 104.108.37.78
+[+] Record: 23.0.87.23
+[+] Record: 23.55.1.49
 
-Unique record(s) for akamai.com:
+4 Unique record(s) for akamai.com:
 
-23.207.40.217
-23.60.11.13
-23.54.250.94
-104.125.60.47
+ 104.108.37.78
+ 104.121.219.185
+ 23.0.87.23
+ 23.55.1.49
 
 $ ./QueryMultipleDNSResolvers.py -l public-dns-servers.short akamai.com -v
 
 Number of resolvers to be used: 6
 
-RESOLVER: 4.2.2.3
- [+] Record: 95.100.58.193
-RESOLVER: 209.244.0.3
- [+] Record: 95.100.58.193
-RESOLVER: 209.244.0.4
- [+] Record: 104.118.87.213
-RESOLVER: 64.6.64.6
- [+] Record: 23.36.217.204
-RESOLVER: 64.6.65.6
- [+] Record: 23.56.119.23
-RESOLVER: 9.9.9.9
- [+] Record: 104.109.67.178
+[!] RESOLVER: 4.2.2.3
+[+] Record: 104.108.37.78
+[!] RESOLVER: 209.244.0.3
+[+] Record: 2.19.135.23
+[!] RESOLVER: 209.244.0.4
+[+] Record: 104.121.219.185
+[!] RESOLVER: 64.6.64.6
+[+] Record: 104.108.37.78
+[!] RESOLVER: 64.6.65.6
+[+] Record: 23.0.87.23
+[!] RESOLVER: 9.9.9.9
+[+] Record: 23.214.44.12
 
-Unique record(s) for akamai.com:
+5 Unique record(s) for akamai.com:
 
-95.100.58.193
-23.56.119.23
-104.118.87.213
-104.109.67.178
-23.36.217.204
+ 104.108.37.78
+ 104.121.219.185
+ 2.19.135.23
+ 23.0.87.23
+ 23.214.44.12
 ```
