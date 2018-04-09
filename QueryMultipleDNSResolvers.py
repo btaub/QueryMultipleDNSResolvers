@@ -43,7 +43,7 @@ for q in list_of_resolvers:
     except KeyboardInterrupt:
         print("User cancelled, skipping %s" %q)
 
-print("\033[;1m\nUnique record(s) for %s:\n" %args.DOMAIN)
+print("\033[;1m\n%s Unique record(s) for %s:\n" %(len(set(result)),args.DOMAIN))
 
 for u in sorted(set(result)):
     print("\033[;0m %s" %u)
