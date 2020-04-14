@@ -2,7 +2,9 @@
 
 import dns.resolver
 import argparse
+import socket
 
+socket.timeout = 10
 result = []
 
 # Handle arguments
@@ -32,11 +34,20 @@ for q in list_of_resolvers:
     if args.VERBOSE:
         print('\033[0;91m[!] RESOLVER: %s' % q)
     try:
-        resolver.timeout = 10 # Not working, why?
-        answer = resolver.query(args.DOMAIN, args.TYPE)
-        for rr in answer:
-            print("\033[1;32m[+] Record: %s" %rr)
-            result.append(str(rr))
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(3)
+        checkServer = sock.connect_ex((q,53))
+
+        if checkServer == 0: # Port is up
+ #          resolver.timeout = 10 # Not working, why?
+            answer = resolver.query(args.DOMAIN, args.TYPE)
+            for rr in answer:
+                print("\033[1;32m[+] Record: %s" %rr)
+                result.append(str(rr))
+        else:
+            print("%s not responding, skipped" %q)
+       
+        sock.close()
     except Exception as e:
         print("Error %s, %r" %(q,e))
 # Trap Ctrl-c to bypass slow/unresponive DNS server
