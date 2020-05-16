@@ -19,7 +19,8 @@ args = parser.parse_args()
 with open(args.LIST_OF_NAMESERVERS) as servers:
     list_of_resolvers = []
     for line in servers:
-        if not line.startswith("#"):
+#        print(line, len(line))
+        if not line.startswith('#') and not line.startswith('\n'):
             list_of_resolvers.append(line.strip())
 
 if args.VERBOSE:
