@@ -55,7 +55,13 @@ for q in list_of_resolvers:
     except KeyboardInterrupt:
         print("User cancelled, skipping %s" %q)
 
-print("\033[;1m\n%s Unique record(s) for %s:\n" %(len(set(result)),args.DOMAIN))
+# There's probably a better way to handle this:
+if len(set(result)) == 1:
+    print("\033[;1m\n%s Unique record for %s:\n" %(len(set(result)),args.DOMAIN))
+else:
+    print("\033[;1m\n%s Unique records for %s:\n" %(len(set(result)),args.DOMAIN))
 
 for u in sorted(set(result)):
     print("\033[;0m %s" %u)
+
+print('')
