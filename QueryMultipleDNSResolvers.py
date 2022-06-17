@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import dns.resolver
 import argparse
@@ -27,6 +27,7 @@ if args.VERBOSE:
     print("\nNumber of resolvers to be used: %s\n" % len(list_of_resolvers))
 
 for q in list_of_resolvers:
+    idx_ns = list_of_resolvers.index(q)
     resolver = dns.resolver.Resolver(configure=False)
 # This is stupid, I have to make each nameserver it's own list?
     qq = []
@@ -34,6 +35,7 @@ for q in list_of_resolvers:
     resolver.nameservers = qq
     if args.VERBOSE:
         print('\033[0;91m[!] RESOLVER: %s' % q)
+        print('\033[0;91m[!] Attempt: %s ' %(idx_ns))
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(3)
@@ -47,7 +49,7 @@ for q in list_of_resolvers:
                 result.append(str(rr))
         else:
             print("%s not responding, skipped" %q)
-       
+
         sock.close()
     except Exception as e:
         print("Error %s, %r" %(q,e))
