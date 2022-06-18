@@ -28,17 +28,18 @@ if args.VERBOSE:
 
 for q in list_of_resolvers:
     idx_ns = list_of_resolvers.index(q)
+    idx_ns += 1 # Since we start at 0
     resolver = dns.resolver.Resolver(configure=False)
-# This is stupid, I have to make each nameserver it's own list?
+    # I have no idea why I have to make each nameserver it's own list, but it works.
     qq = []
     qq.append(q)
     resolver.nameservers = qq
     if args.VERBOSE:
         print('\033[0;91m[!] RESOLVER: %s' % q)
-        print('\033[0;91m[!] Attempt: %s ' %(idx_ns))
+        print('\033[0;91m[!] Attempt %s of %s: ' %(idx_ns,len(list_of_resolvers)))
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(3)
+        sock.settimeout(1)
         checkServer = sock.connect_ex((q,53))
 
         if checkServer == 0: # Port is up
