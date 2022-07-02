@@ -19,7 +19,6 @@ args = parser.parse_args()
 with open(args.LIST_OF_NAMESERVERS) as servers:
     list_of_resolvers = []
     for line in servers:
-#        print(line, len(line))
         if not line.startswith('#') and not line.startswith('\n'):
             list_of_resolvers.append(line.strip())
 
@@ -44,7 +43,7 @@ for q in list_of_resolvers:
 
         if checkServer == 0: # Port is up
  #          resolver.timeout = 10 # Not working, why?
-            answer = resolver.query(args.DOMAIN, args.TYPE)
+            answer = resolver.resolve(args.DOMAIN, args.TYPE)
             for rr in answer:
                 print("\033[1;32m[+] Record: %s" %rr)
                 result.append(str(rr))
@@ -64,7 +63,7 @@ if len(set(result)) == 1:
 else:
     print("\033[;1m\n%s Unique records for %s:\n" %(len(set(result)),args.DOMAIN))
 
-for u in sorted(set(result)):
-    print("\033[;0m %s" %u)
+for rec in sorted(set(result)):
+    print("\033[;0m %s" %rec)
 
 print('')
