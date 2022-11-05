@@ -34,8 +34,8 @@ for q in list_of_resolvers:
     qq.append(q)
     resolver.nameservers = qq
     if args.VERBOSE:
-        print('\033[0;91m[!] RESOLVER: %s' % q)
         print('\033[0;91m[!] Attempt %s of %s: ' %(idx_ns,len(list_of_resolvers)))
+        print('\033[0;91m[!] RESOLVER: %s' % q)
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(1)
