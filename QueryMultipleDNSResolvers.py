@@ -28,6 +28,7 @@ for _ns in list_of_resolvers:
     idx_ns = list_of_resolvers.index(_ns)
     idx_ns += 1 # Since we start at 0
     resolver = dns.resolver.Resolver()
+    resolver.lifetime = 1
 
     ns = []
     ns.append(_ns)
@@ -36,7 +37,6 @@ for _ns in list_of_resolvers:
         print('\033[0;91m[!] Attempt %s of %s: ' %(idx_ns,len(list_of_resolvers)))
         print('\033[0;91m[!] RESOLVER: %s' % _ns)
     try:
-        resolver.lifetime = 1
         answer = resolver.resolve(args.DOMAIN, args.TYPE)
         for rr in answer:
             print("\033[1;32m[+] Record: %s" %rr)
