@@ -39,7 +39,6 @@ for _ns in list_of_resolvers:
         resolver.lifetime = 1
         answer = resolver.resolve(args.DOMAIN, args.TYPE)
         for rr in answer:
-            resolver.timeout = 7
             print("\033[1;32m[+] Record: %s" %rr)
             result.append(str(rr))
 
