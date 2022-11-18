@@ -7,7 +7,7 @@ Required - dnspython http://www.dnspython.org (pip install dnspython or apt inst
 
 ## Sample output:
 
-```
+```console
 % ./QueryMultipleDNSResolvers.py -l public-dns-servers.short akamai.com
 [+] Record: 23.211.232.45
 [+] Record: 23.47.60.102
