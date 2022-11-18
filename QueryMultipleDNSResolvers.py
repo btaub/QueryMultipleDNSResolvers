@@ -4,7 +4,6 @@ import dns.resolver
 import argparse
 import socket
 
-socket.timeout = 10
 result = []
 
 # Handle arguments
@@ -25,39 +24,31 @@ with open(args.LIST_OF_NAMESERVERS) as servers:
 if args.VERBOSE:
     print("\nNumber of resolvers to be used: %s\n" % len(list_of_resolvers))
 
-for q in list_of_resolvers:
-    idx_ns = list_of_resolvers.index(q)
+for _ns in list_of_resolvers:
+    idx_ns = list_of_resolvers.index(_ns)
     idx_ns += 1 # Since we start at 0
-    resolver = dns.resolver.Resolver(configure=False)
-    # I have no idea why I have to make each nameserver it's own list, but it works.
-    qq = []
-    qq.append(q)
-    resolver.nameservers = qq
+    resolver = dns.resolver.Resolver()
+
+    ns = []
+    ns.append(_ns)
+    resolver.nameservers = ns
     if args.VERBOSE:
         print('\033[0;91m[!] Attempt %s of %s: ' %(idx_ns,len(list_of_resolvers)))
-        print('\033[0;91m[!] RESOLVER: %s' % q)
+        print('\033[0;91m[!] RESOLVER: %s' % _ns)
     try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        checkServer = sock.connect_ex((q,53))
+        resolver.lifetime = 1
+        answer = resolver.resolve(args.DOMAIN, args.TYPE)
+        for rr in answer:
+            resolver.timeout = 7
+            print("\033[1;32m[+] Record: %s" %rr)
+            result.append(str(rr))
 
-        if checkServer == 0: # Port is up
- #          resolver.timeout = 10 # Not working, why?
-            answer = resolver.resolve(args.DOMAIN, args.TYPE)
-            for rr in answer:
-                print("\033[1;32m[+] Record: %s" %rr)
-                result.append(str(rr))
-        else:
-            print("%s not responding, skipped" %q)
-
-        sock.close()
     except Exception as e:
-        print("Error %s, %r" %(q,e))
+        print("Error %s, %r" %(_ns,e))
 # Trap Ctrl-c to bypass slow/unresponive DNS server
     except KeyboardInterrupt:
-        print("User cancelled, skipping %s" %q)
+        print("User cancelled, skipping %s" %_ns)
 
-# There's probably a better way to handle this:
 if len(set(result)) == 1:
     print("\033[;1m\n%s Unique record for %s:\n" %(len(set(result)),args.DOMAIN))
 else:
