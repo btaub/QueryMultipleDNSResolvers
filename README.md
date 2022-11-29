@@ -1,9 +1,11 @@
 # QueryMultipleDNSResolvers
 A script to check record status against N public dns resolvers
 
-This tool can be useful if you make frequent DNS changes and need to check propagation status. The full list of resolvers was grabbed from: https://www.lifewire.com/free-and-public-dns-servers-2626062
+This tool can be useful if you make frequent DNS changes and need to check propagation status. The inital list of resolvers was grabbed from: https://www.lifewire.com/free-and-public-dns-servers-2626062
 
 Required - dnspython http://www.dnspython.org (pip install dnspython or apt install python-dnspython)
+
+Further current, global public servers can be found here: https://public-dns.info/
 
 ## Sample output:
 
